@@ -1,0 +1,61 @@
+$orange-primary-color: #ffd6ae;
+$orange-secondary-color: #fb4b29;
+$black-primary-color: 565656;
+$white-primary-color: #ffffff;
+$black-primary-color: #565656;
+
+$container-width: 78%;
+
+@mixin center-element($top: 50%, $left: 50%) {
+  left: $left;
+  top: $top;
+  transform: translate(-50%, -50%);
+}
+
+@mixin useFont1() {
+  font-family: "Kaushan Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin useFont2() {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+@mixin useFont3() {
+  font-family: "Rowdies", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+@mixin useFont3SemiBold() {
+  font-family: "Rowdies", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin useFont3Bold() {
+  font-family: "Rowdies", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@mixin useFont4() {
+  font-family: "Oleo Script", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin useFont4Bold() {
+  font-family: "Oleo Script", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@mixin truncateText($line: 1, $direction: vertical) {
+  display: -webkit-box;
+
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: $direction;
+  overflow: hidden;
+}

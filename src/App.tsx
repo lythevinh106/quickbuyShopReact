@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { Fragment, ReactElement, ReactHTMLElement, ReactNode } from 'react';
 import logo from './logo.svg';
-import './App.css';
+
+import { Route, Router, Routes, useRoutes } from 'react-router-dom';
+
+import { routeElement, routesPublic } from './routes/routes';
+import DefaultLayout from './Layout/DefaultLayout/DefaultLayout';
+import Home from './pages/Home/Home';
 
 function App() {
+
+
+
+  let element = useRoutes(routesPublic.map((route: routeElement, index) => {
+    return {
+      path: route.path,
+      element: <route.layoutMode><route.element></route.element></route.layoutMode>
+
+    }
+
+  }));
+
+
+
+
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div className='App'>
+
+      {element}
+
     </div>
   );
+
+
 }
+
+
+
+
+
 
 export default App;

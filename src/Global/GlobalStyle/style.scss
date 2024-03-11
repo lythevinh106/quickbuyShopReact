@@ -1,0 +1,72 @@
+@import "./reset.scss";
+
+@import "./font.scss";
+@import "./varibale.scss";
+
+:root {
+  --orange-primary-color: #ffd6ae;
+  --orange-secondary-color: #fb4b29;
+  --black-primary-color: 565656;
+}
+
+@mixin wrapperMobile() {
+}
+
+body {
+  max-height: 100vh;
+  overflow-y: hidden;
+  color: $white-primary-color;
+  font-family: "Kaushan Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+}
+
+// font-family: "Patua One", serif;
+// --------------------------------text global styles --------------------------------
+.orange-primary-text {
+  color: $orange-primary-color !important;
+}
+
+.white-primary-text {
+  color: $white-primary-color !important;
+}
+
+.orange-secondary-text {
+  color: $orange-secondary-color !important;
+}
+
+.black-primary-text {
+  color: $black-primary-color !important;
+}
+
+// --------------------------------bg global styles --------------------------------
+
+.orange-secondary-bg {
+  background-color: $orange-secondary-color !important;
+}
+
+.orange-primary-bg {
+  background-color: $orange-primary-color !important;
+}
+
+.container {
+  width: $container-width;
+  padding: 0px 160px;
+  width: 100%;
+}
+
+///scss for header
+///
+///
+///
+///
+///
+///
+///
+///
+///
+///
+///
