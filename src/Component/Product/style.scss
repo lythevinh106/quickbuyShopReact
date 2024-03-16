@@ -1,0 +1,91 @@
+@import "../../Layout/DefaultLayout/ComponentLayout/Footer/FooterVariable.scss";
+
+@import "../../Global/GlobalStyle/varibale.scss";
+@import "../../Global/GlobalStyle/mixins.scss";
+.product-new-item {
+  text-transform: uppercase;
+  font-size: 13px;
+
+  padding: 0 $paddingItem;
+
+  border: none;
+  .item {
+    border: none;
+    background-color: $white-primary-color;
+
+    display: flex;
+
+    border-radius: $borderValue;
+    &--left {
+      border-top-left-radius: $borderValue;
+      border-bottom-left-radius: $borderValue;
+      width: $widthLeft;
+      position: relative;
+
+      cursor: pointer;
+
+      img {
+        position: absolute;
+        filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.9));
+        width: 160px;
+        height: auto;
+        right: 10%;
+        top: 40%;
+        transform: translateY(-50%) rotate(-10deg);
+        transition: all 0.5s linear;
+        // object-fit: cover;
+      }
+    }
+
+    &--right {
+      width: calc(100% - ($widthLeft));
+      padding: 6px 2px 4px 12px;
+      color: $black-primary-color !important;
+      &__title {
+        font-size: 13px;
+        font-weight: bold;
+
+        @include truncateText();
+        overflow: hidden;
+      }
+
+      &__price {
+        margin-top: 5px;
+
+        @include truncateText();
+      }
+
+      &__type {
+        margin-top: 3px;
+        text-transform: lowercase;
+        font-size: 12px;
+        @include useFont4();
+        display: flex;
+        align-items: center;
+
+        .title {
+          font-weight: bold;
+          font-size: 15px;
+        }
+        .title__type {
+          margin-left: 5px;
+        }
+        // @include truncateText(1);
+      }
+      &__other {
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        margin-top: 1px;
+
+        .detail {
+          cursor: pointer;
+          @include useFont2();
+        }
+      }
+    }
+    &:hover .item--left img {
+      transform: translateY(-50%) rotate(0deg) scale(1.1);
+    }
+  }
+}

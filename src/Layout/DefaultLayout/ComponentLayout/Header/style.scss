@@ -1,0 +1,83 @@
+@import "../../../../Global/GlobalStyle/varibale.scss";
+@import "../../../../Global/GlobalStyle/mixins.scss";
+
+.header {
+  @include useFont1();
+  color: $white-primary-color;
+
+  &-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
+  }
+  &-main__logo {
+    cursor: pointer;
+  }
+  &-main__category {
+    display: flex;
+    justify-content: center;
+
+    li {
+      text-transform: uppercase;
+      margin: 0 14px;
+      font-weight: bold;
+      font-size: 18px;
+      position: relative;
+      &::after {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 105%;
+        width: 0%;
+        background-color: $orange-secondary-color;
+        height: 4px;
+        transition: all 0.5s linear;
+      }
+
+      &:hover {
+        color: $orange-secondary-color;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      &:hover:after {
+        width: 100%;
+      }
+    }
+  }
+
+  &-main__other {
+    display: flex;
+    justify-content: end;
+    display: flex;
+    align-items: center;
+
+    span {
+      cursor: pointer;
+      &:nth-child(1) {
+        margin-right: 10px;
+        svg {
+          fill: $orange-secondary-color !important;
+        }
+      }
+      &:nth-child(2) {
+        position: relative;
+        svg {
+          position: relative;
+          &:after {
+            content: "";
+            position: absolute !important;
+
+            @include center_element();
+
+            background-color: $orange-secondary-color;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            z-index: -1;
+          }
+        }
+      }
+    }
+  }
+}

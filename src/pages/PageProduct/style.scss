@@ -1,0 +1,25 @@
+@import "../../Global/GlobalStyle/varibale.scss";
+@import "../../Global/GlobalStyle/mixins.scss";
+
+.product-page {
+  padding: 0px 20px 10px 20px;
+
+  @include useFont2();
+
+  &__title {
+    text-align: center;
+
+    font-size: 35px;
+  }
+  &__filter {
+  }
+  &__list {
+    margin: 0px -20px;
+  }
+  &__paging {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin: 15px auto;
+  }
+}

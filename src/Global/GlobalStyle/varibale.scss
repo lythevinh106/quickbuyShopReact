@@ -4,7 +4,7 @@ $black-primary-color: 565656;
 $white-primary-color: #ffffff;
 $black-primary-color: #565656;
 
-$container-width: 78%;
+$container-width: 78% !important;
 
 @mixin center-element($top: 50%, $left: 50%) {
   left: $left;
@@ -50,12 +50,4 @@ $container-width: 78%;
   font-family: "Oleo Script", system-ui;
   font-weight: 700;
   font-style: normal;
-}
-
-@mixin truncateText($line: 1, $direction: vertical) {
-  display: -webkit-box;
-
-  -webkit-line-clamp: $line;
-  -webkit-box-orient: $direction;
-  overflow: hidden;
 }

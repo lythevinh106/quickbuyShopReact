@@ -1,0 +1,49 @@
+@import "../../Global/GlobalStyle/varibale.scss";
+@import "../../Global/GlobalStyle/mixins.scss";
+
+.product {
+  &-banner {
+    // img {
+    //   transition: all 0.5s linear;
+    // }
+
+    @include useFont3Bold();
+    z-index: -1;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-63%);
+    right: 0;
+    width: 100%;
+  }
+  &-banner-main {
+    .slider-container {
+      .slick-slider {
+        // margin-right: -$paddingItem !important;
+        position: relative !important;
+
+        .slick-arrow.slick-next {
+          position: absolute !important;
+          right: -50px;
+          // top: -50% !important;
+
+          // transform: translateY(-50%) !important;
+
+          &::before {
+            font-size: 40px !important;
+            color: $orange-secondary-color;
+          }
+        }
+        .slick-arrow.slick-prev {
+          position: absolute !important;
+
+          left: -55px;
+          // transform: none !important;
+          &::before {
+            font-size: 40px !important;
+            color: $orange-secondary-color;
+          }
+        }
+      }
+    }
+  }
+}

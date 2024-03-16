@@ -1,0 +1,52 @@
+@import "../../../../Global/GlobalStyle/varibale.scss";
+@import "../../../../Global/GlobalStyle/mixins.scss";
+
+@import "./FooterVariable.scss";
+.product-footer {
+  position: fixed;
+  bottom: 1vh;
+  right: 0;
+  width: 100%;
+
+  // @include useFont2();
+  @include useFont2();
+
+  &-main {
+    .slider-container {
+      .slick-slider {
+        // margin-right: -$paddingItem !important;
+        position: relative !important;
+
+        .slick-arrow.slick-next {
+          position: absolute !important;
+          top: -50px !important;
+          right: $paddingItem + 10px !important;
+          transform: none !important;
+
+          &::before {
+            font-size: 40px !important;
+            color: $orange-secondary-color;
+          }
+        }
+        .slick-arrow.slick-prev {
+          position: absolute !important;
+          top: -50px !important;
+          right: calc(60px + $paddingItem) !important;
+          left: unset !important;
+          transform: none !important;
+          &::before {
+            font-size: 40px !important;
+            color: $orange-secondary-color;
+          }
+        }
+      }
+
+      .product-center-mode .slick-current {
+        img {
+          transition: all 0.5s linear;
+          transform: translateY(-50%) rotate(0deg) scale(1.1);
+        }
+      }
+    }
+  }
+}
