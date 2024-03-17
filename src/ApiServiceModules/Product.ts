@@ -75,7 +75,10 @@ export const ProductApi  = {
     getProduct<Product>(id:string) {
       
      
+       
       return AxiosClient.get<Product>(`/Product/getProductClient/${id}`); 
+        
+     
    
 
      },

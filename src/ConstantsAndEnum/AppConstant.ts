@@ -1,0 +1,1 @@
+export  const RcTime=1000*60

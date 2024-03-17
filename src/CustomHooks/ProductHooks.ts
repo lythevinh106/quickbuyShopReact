@@ -1,7 +1,7 @@
 import { requestFetchDataGeneric } from "GenericType/GenericType";
 
 import ProductApi, { Product, requestFetchProduct, responseFetchProduct } from "ApiServiceModules/Product";
-import { useQuery } from "@tanstack/react-query";
+import { QueryOptions, UseQueryOptions, useQuery } from "@tanstack/react-query";
 
 
 
@@ -11,9 +11,7 @@ export const useFetchProducts=(options:object,requestFetchProduct:requestFetchPr
         
        
         {
-      queryKey: ["promotionProducts"],
-
-      queryFn: async ()=> 
+      queryKey: ["promotionProducts"], queryFn: async ()=> 
       
       {
 
@@ -24,8 +22,14 @@ export const useFetchProducts=(options:object,requestFetchProduct:requestFetchPr
       
       }
     
+
+     
       ,
-      ...options                
+      
+       
+      ...options    
+             
+
      }
          
      
@@ -40,12 +44,12 @@ export const useGetProduct=(options:object,id:string)=>{
       
      
       {
-    queryKey: ["detailProduct"],
+    queryKey: ["detailProduct",id],
 
     queryFn: async  ()=>   
     {
          await new Promise(resolve => setTimeout(resolve, 1000));
-         
+       
           return  ProductApi.getProduct<Product>(id)          
     
     } 
@@ -91,11 +95,11 @@ export const useFetchPageProducts=(options:object,requestFetchProduct:requestFet
 
 
 
- const listKey= Object.values(requestFetchProduct);
+//  const listKey= Object.values(requestFetchProduct);
 
 
   return  useQuery({
-    queryKey: ["pageProducts",...listKey],
+    queryKey: ["pageProducts",{...requestFetchProduct}],
 
 
     queryFn: async ()=> 

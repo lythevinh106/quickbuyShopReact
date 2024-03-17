@@ -9,6 +9,9 @@ import circle2 from "../../Storage/Images/circle2.svg";
 import { Tooltip } from '@mui/material';
 
 import "./style.scss"
+import { useAppDispatch } from 'app/hook';
+import { handleClosePageProduct, updateStatePageProduct } from 'features/pageProductStore';
+import { handleCloseDetailProduct } from 'features/detailProductStore';
 
 interface props {
 
@@ -18,6 +21,9 @@ interface props {
 
 
 function ProductThumbnail({ product, onBuyProduct }: props) {
+
+
+    const dispatch = useAppDispatch();
     return (
         <div key={product?.id} className="product-item">
             <div className="item">
@@ -52,7 +58,22 @@ function ProductThumbnail({ product, onBuyProduct }: props) {
                         <img src={circle2} alt="" />
 
                         <div className="info__promotion">
-                            <Tooltip title={product?.promotion?.name} >
+                            <Tooltip onClick={
+
+                                () => {
+
+                                    dispatch(updateStatePageProduct({
+                                        isOpen: true,
+                                        isPromotion: true
+
+                                    }));
+
+                                    dispatch(handleCloseDetailProduct());
+
+
+
+                                }
+                            } title={product?.promotion?.name} >
                                 <BoltIcon fontSize='large' color='warning' >
                                 </BoltIcon>
                             </Tooltip>

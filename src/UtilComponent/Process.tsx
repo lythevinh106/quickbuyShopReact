@@ -22,16 +22,8 @@ function Process(props: any) {
                 (
                     <>
 
-                        <LinearProgress color="secondary" />
-                        {/* <Backdrop
-                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                            open={isProgress}
-                            onClick={() => {
+                        <LinearProgress sx={{ height: "5px" }} color="secondary" />
 
-                            }}
-                        >
-                            <CircularProgress color="inherit" />
-                        </Backdrop> */}
                     </>
                 )
 

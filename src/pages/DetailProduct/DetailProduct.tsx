@@ -17,9 +17,11 @@ import { Promotion } from 'ApiServiceModules/Promotion';
 import { Category } from 'ApiServiceModules/Category';
 import { useAppDispatch, useAppSelector } from 'app/hook';
 import { activeProgress } from 'features/processSlice';
-import { CSSProperties, MouseEvent, useEffect } from 'react';
+import { CSSProperties, MouseEvent, useEffect, useRef } from 'react';
 import SkeletionDetailProduct from './SkeletionDetailProduct';
 import { handleCloseDetailProduct } from 'features/detailProductStore';
+import { updateStatePageProduct } from 'features/pageProductStore';
+import useErrorToast from 'CustomHooks/Toast';
 
 // interface Props {
 //     onClose: () => void,
@@ -40,11 +42,14 @@ function DetailProduct({ }: any) {
 
 
     const dispatch = useAppDispatch()
+    const { setMessage } = useErrorToast();
+
 
     const stateFromRedux = useAppSelector((state) => state.detailProduct)
 
+    const errorRef = useRef("");
 
-    const { isLoading, data, isError, error, isFetching, refetch }
+    const { isLoading, data, isError, error: errorProduct, isFetching, refetch }
         = useGetProduct({
             // select: (data: any): detailProduct => {
 
@@ -54,10 +59,24 @@ function DetailProduct({ }: any) {
 
             // }
             // ,
-            enabled: !!stateFromRedux.idProduct
+
+
+            enabled: !!stateFromRedux.idProduct,
+            retry: 0,
+            throwError: true,
+
+
 
 
         }, stateFromRedux.idProduct);
+
+
+    // useEffect(() => {
+    //     if (isError && errorProduct) {
+
+    //         setMessage(errorProduct.message);
+    //     }
+    // }, [isError, errorProduct]);
 
 
 
@@ -80,7 +99,7 @@ function DetailProduct({ }: any) {
 
     }
 
-    console.log("state ", stateFromRedux)
+
 
     return (
         <CustomDrawer onClose={handleClose} isOpen={stateFromRedux.isOpen} >
@@ -149,7 +168,21 @@ function DetailProduct({ }: any) {
 
                                         {data?.data?.promotion?.name && (<div className="item--right__promotion">
 
-                                            <NavLink to="/">
+                                            <NavLink onClick={
+
+                                                () => {
+
+                                                    dispatch(updateStatePageProduct({
+                                                        isOpen: true,
+                                                        isPromotion: true
+
+                                                    }));
+
+                                                    dispatch(handleCloseDetailProduct());
+
+
+                                                }
+                                            } to="/">
 
                                                 Sản Phẩm Đang trong
                                                 : {data?.data?.promotion?.name}  <EnergySavingsLeafIcon sx={{

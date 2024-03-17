@@ -10,16 +10,17 @@ import "./style.scss"
 import { useAppDispatch, useAppSelector } from 'app/hook';
 import { useFetchPageProducts, useGetProduct } from 'CustomHooks/ProductHooks';
 import { requestFetchProduct } from 'ApiServiceModules/Product';
-import { FetchQueryOptions } from '@tanstack/react-query';
+import { FetchQueryOptions, keepPreviousData } from '@tanstack/react-query';
 import { Category } from '@mui/icons-material';
 import { NewProduct } from 'Layout/DefaultLayout/ComponentLayout/Footer/Footer';
-import { handleClosePageProduct } from 'features/pageProductStore';
+import { handleClosePageProduct, updateStatePageProduct } from 'features/pageProductStore';
 import SkeletonProduct from 'Component/Product/SkeletonProduct';
 import Pagging from 'UtilComponent/Pagging';
 import { activeProgress } from 'features/processSlice';
 import { ProductPriceSort, ProductTimeSort } from 'ConstantsAndEnum/queryParam';
 import { useFetchPromotion } from 'CustomHooks/PromotionHooks';
 import { Promotion, requestFetchPromotion } from 'ApiServiceModules/Promotion';
+import { handleCloseDetailProduct } from 'features/detailProductStore';
 
 
 
@@ -65,8 +66,10 @@ function PageProduct({ }: props) {
     const { isLoading, data, isError, error, isFetching, refetch }
         = useFetchPageProducts({
 
-            enabled: !!stateFromRedux.categoryId || !!stateFromRedux.isPromotion
-
+            enabled: !!stateFromRedux.categoryId || !!stateFromRedux.isPromotion,
+            //Placeholder Data gần giống Initial Data nhưng  Placeholder Data   k lưu vào cache
+            //nó giúp data k set= undifire khi goi cai moi
+            placeholderData: keepPreviousData
 
         }, {
             PageSize: pageSize, CategoryId: stateFromRedux.categoryId,
@@ -75,6 +78,7 @@ function PageProduct({ }: props) {
 
         });
 
+    console.log("isLoading" + isLoading, "isFetch" + isFetching, "data" + data);
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
@@ -121,10 +125,12 @@ function PageProduct({ }: props) {
 
 
 
-            enabled: !!stateFromRedux.isPromotion
+            enabled: !!stateFromRedux.isPromotion,
+
+
         }, fetchQueryPromotion)
 
-    // console.log("promotion", dataPromotion);
+
 
 
 
@@ -156,12 +162,13 @@ function PageProduct({ }: props) {
                 <div className="product-page" >
 
 
-                    {!isFetching && !isLoading ?
+                    {data ?
 
                         (
 
 
-                            <h3 className="product-page__title">
+                            <h3 className="product-page__title"
+                            >
 
                                 {
 
@@ -177,7 +184,7 @@ function PageProduct({ }: props) {
 
                     }
 
-                    <Grid container className="product-page__filter " sx={{ width: "100%" }} spacing={0} >
+                    <Grid container className="product-page__filter " sx={{ width: "100%", marginBottom: "22px" }} spacing={0} >
 
                         <Grid item xs={2}
                         >
@@ -237,11 +244,15 @@ function PageProduct({ }: props) {
 
                             <Grid item xs={2}
                             >
-                                <FormControl variant="standard" color="success" sx={{ width: "200px", marginBottom: "20px", }} size="small">
+                                <FormControl variant="standard" color="success" sx={{
+                                    width: "200px", marginBottom: "20px",
+
+
+                                }} size="small">
 
                                     <InputLabel id="demo-simple-select-label">Chương Trình Khuyến Mãi</InputLabel>
                                     <Select
-                                        labelId="demo-simple-select-label"
+                                        labelId="demo-simple-select-label "
                                         id="demo-simple-select"
                                         value={filterPromotion ? filterPromotion : " "}
 
@@ -274,7 +285,7 @@ function PageProduct({ }: props) {
                         <Grid container rowSpacing={6} columnSpacing={2}>
 
 
-                            {isFetching || isLoading ? (
+                            {!data?.data?.data ? (
 
                                 (Array(pageSize).fill(null).map((v, i) => (
                                     <Grid key={i} item xs={4}>

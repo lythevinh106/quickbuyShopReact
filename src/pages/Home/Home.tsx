@@ -6,7 +6,7 @@ import { Box, Button, Card, FormControl, Grid, InputLabel, LinearProgress, MenuI
 
 import BoltIcon from '@mui/icons-material/Bolt';
 import { useFetchProducts } from "CustomHooks/ProductHooks";
-import { Product, requestFetchProduct, responseFetchProduct } from "ApiServiceModules/Product";
+import ProductApi, { Product, requestFetchProduct, responseFetchProduct } from "ApiServiceModules/Product";
 import { useGetPromotion } from "CustomHooks/PromotionHooks";
 import { Promotion } from "ApiServiceModules/Promotion";
 import { Category } from "ApiServiceModules/Category";
@@ -34,6 +34,9 @@ import DetailProduct from "pages/DetailProduct/DetailProduct";
 import { updateStateDetailProduct } from "features/detailProductStore";
 import PageProduct from "pages/PageProduct/PageProduct";
 import { NewProduct } from "Layout/DefaultLayout/ComponentLayout/Footer/Footer";
+import { handleClosePageProduct } from "features/pageProductStore";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 
 
@@ -90,9 +93,6 @@ function Home() {
 
 
 
-
-
-
     const settingThumbnails = {
         dots: false,
         infinite: true,
@@ -101,46 +101,22 @@ function Home() {
         slidesToScroll: 1
     };
 
+
+
+
     const { isLoading, data, isError, error, isFetching, refetch }
 
         = useFetchProducts({
-            // select: (data: any): responseFetchProduct => {
 
-            //     let newData = data?.data;
-
-            //     let ResponseData: responseFetchProduct = {
-            //         ...newData.currentPage,
-            //         data: newData?.data.map((data: PromotionProduct) => data)
-            //     };
-
-            //     return ResponseData
-            // }
-            // ,
-
-            onSuccess: (dataResponse: responseFetchProduct) => {
-
-
-
-            },
-            delay: 5000
-
-
-
+            retry: false,
 
 
 
         }, fetchQuery);
 
-    // console.log("isfetching", isFetching, "isLoading", isLoading);
 
 
 
-    // if (isFetching || isLoading) {
-
-    //     dispatch(activeProgress(true));
-    // } else {
-    //     dispatch(activeProgress(false));
-    // }
 
 
     return (
@@ -181,10 +157,10 @@ function Home() {
                                 (
                                     <ProductThumbnail onBuyProduct={() => {
 
-                                        // setIsStateDetailProduct({ isOpen: true, id: product.id })
+
 
                                         dispatch(updateStateDetailProduct({ isOpen: true, idProduct: product.id }));
-
+                                        dispatch(handleClosePageProduct());
 
                                     }
                                     } key={product.id} product={product as PromotionProduct} />
